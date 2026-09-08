@@ -1,0 +1,48 @@
+id: example-navigation
+enabled: true
+title: "<gradient:#22d3ee:#8b5cf6>Dialog Navigation</gradient>"
+external-title: "<aqua>Navigation"
+can-close-with-escape: true
+pause: false
+after-action: CLOSE
+type: multi_action
+columns: 1
+
+body:
+  - type: text
+    text: "<gray>Buttons can open other YAML dialogs, run commands, play sounds, teleport, give items, send titles and more."
+    width: 360
+
+buttons:
+  - label: "<light_purple>Open Form"
+    width: 200
+    validate-inputs: false
+    actions:
+      - type: open-dialog
+        dialog: example-form
+
+  - label: "<yellow>Open Confirmation"
+    width: 200
+    validate-inputs: false
+    actions:
+      - type: open-dialog
+        dialog: example-confirm
+
+  - label: "<aqua>Show Title"
+    width: 200
+    validate-inputs: false
+    actions:
+      - type: title
+        title: "<gradient:#22d3ee:#8b5cf6>Modexa</gradient>"
+        subtitle: "<gray>Everything comes from YAML"
+        fade-in-ms: 250
+        stay-ms: 1800
+        fade-out-ms: 500
+
+exit-button:
+  enabled: true
+  label: "<red>Close"
+  width: 200
+  validate-inputs: false
+  actions:
+    - type: close-dialog

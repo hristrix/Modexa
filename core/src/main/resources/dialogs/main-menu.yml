@@ -1,0 +1,74 @@
+id: main-menu
+enabled: true
+
+# This becomes the title of the dialog after the player clicks the ESC-menu button.
+title: "<gradient:#7c3aed:#c084fc><bold>Server Menu</bold></gradient>"
+
+# This is the label Minecraft shows on the ESC / game menu button.
+external-title: "<light_purple><bold>Server Menu</bold></light_purple>"
+
+permission: ""
+no-permission-message: "<red>You do not have permission to use the server menu."
+can-close-with-escape: true
+pause: false
+after-action: CLOSE
+type: multi_action
+columns: 3
+
+body:
+  - type: text
+    text: "<gray>Choose an option below. This menu is powered by <white>Modexa</white> and configured in <white>dialogs/main-menu.yml</white>."
+    width: 420
+
+# IMPORTANT FOR THE ESC-MENU MIRROR:
+# Give every button a stable lowercase `id`.
+# You can change actions and run /modexa reload without restarting.
+# Adding/removing/reordering buttons, or changing labels/columns, requires restart
+# because Minecraft receives the pause-menu dialog during registry bootstrap.
+buttons:
+  - id: homes
+    label: "<green><bold>Homes</bold>"
+    tooltip: "<gray>Manage your saved homes"
+    width: 150
+    show-in-game-menu: true
+    actions:
+      - type: open-dialog
+        dialog: homes:main
+
+  - id: form
+    label: "<green><bold>Example Form</bold>"
+    tooltip: "<gray>Open the configurable form example"
+    width: 150
+    show-in-game-menu: true
+    actions:
+      - type: open-dialog
+        dialog: example-form
+
+  - id: navigation
+    label: "<aqua><bold>Navigation</bold>"
+    tooltip: "<gray>Open the navigation example"
+    width: 150
+    show-in-game-menu: true
+    actions:
+      - type: open-dialog
+        dialog: example-navigation
+
+  - id: info
+    label: "<yellow><bold>Info</bold>"
+    tooltip: "<gray>Example action chain"
+    width: 150
+    show-in-game-menu: true
+    actions:
+      - type: message
+        text: "<green>Hello <white>{player}</white>! This action was read from main-menu.yml."
+      - type: sound
+        sound: "minecraft:ui.button.click"
+        volume: 1
+        pitch: 1
+
+exit-button:
+  enabled: true
+  label: "<red>Close"
+  width: 150
+  actions:
+    - type: close-dialog

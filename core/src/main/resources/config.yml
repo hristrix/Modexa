@@ -1,0 +1,43 @@
+# Modexa global configuration
+prefix: "<dark_gray>[<gradient:#7c3aed:#c084fc>Modexa</gradient><dark_gray>] <gray>"
+
+# ------------------------------------------------------------
+# Migration from the previous DynamicDialogs name
+# ------------------------------------------------------------
+# On the first Modexa startup, the bootstrapper copies missing files from
+# plugins/DynamicDialogs/ into plugins/Modexa/. The old folder is never
+# modified or deleted. Set this to false after migration if desired.
+migration:
+  import-dynamicdialogs: true
+
+
+# If true, useful parser/action details are logged to console.
+debug: false
+
+# If true, example dialogs are copied on first run.
+create-example-dialogs: true
+
+# Deleting a dialog through /modexa delete moves it into deleted/ instead of destroying it.
+safe-delete: true
+
+# Maximum number of actions allowed on one button. Prevents accidental recursion/abuse.
+max-actions-per-click: 64
+
+# Maximum dialog-to-dialog navigation depth during one click chain.
+max-navigation-depth: 16
+# ------------------------------------------------------------
+# Native Minecraft ESC / game-menu integration
+# ------------------------------------------------------------
+# When enabled, Modexa registers the configured main dialog in
+# minecraft:pause_screen_additions. The ESC-menu button text comes from
+# that dialog's `external-title` field.
+#
+# IMPORTANT: the pause-screen layout is registry data. Changing the title,
+# columns, button labels/order, adding/removing buttons, or changing this
+# enabled/main-dialog setting requires a full server restart.
+# Button ACTIONS are looked up from the current YAML at click time, so action
+# changes can be refreshed with /modexa reload as long as button IDs remain stable.
+game-menu:
+  enabled: true
+  main-dialog: "main-menu"
+

@@ -1,0 +1,33 @@
+id: create
+enabled: true
+title: "<aqua><bold>Set New Home</bold></aqua>"
+type: multi_action
+columns: 1
+permission: dynamichomes.create
+body:
+  - type: text
+    text: "<gray>Your current location will be saved as a new home."
+    width: 320
+inputs:
+  - type: text
+    key: name
+    label: "<yellow>Home name"
+    initial: ""
+    width: 300
+    min-length: 1
+    max-length: 24
+    required: true
+    regex: "^[\\p{L}\\p{N}_ -]+$"
+    validation-message: "<red>Use letters, numbers, spaces, underscores or hyphens."
+buttons:
+  - id: save
+    label: "<green><bold>Save Home</bold></green>"
+    width: 150
+    actions:
+      - type: homes:create
+exit-button:
+  enabled: true
+  label: "<gray>Back"
+  actions:
+    - type: open-dialog
+      dialog: homes:main

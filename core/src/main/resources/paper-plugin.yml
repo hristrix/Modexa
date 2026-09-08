@@ -1,0 +1,13 @@
+name: Modexa
+version: '${version}'
+main: net.hristrix.modexa.ModexaPlugin
+bootstrapper: net.hristrix.modexa.bootstrap.ModexaBootstrap
+api-version: '26.2'
+description: Modular extension platform for Paper 26.2 with a configurable native UI/dialog engine and public module API.
+authors: [Hristrix]
+dependencies:
+  server:
+    PlaceholderAPI:
+      load: BEFORE
+      required: false
+      join-classpath: true

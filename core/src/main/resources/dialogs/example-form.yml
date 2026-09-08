@@ -1,0 +1,155 @@
+id: example-form
+enabled: true
+
+title: "<gradient:#7c3aed:#c084fc>Player Registration</gradient>"
+external-title: "<light_purple>Registration"
+permission: ""
+no-permission-message: "<red>You cannot open this form."
+can-close-with-escape: true
+pause: false
+after-action: CLOSE
+
+# multi_action / form / menu, confirmation, notice
+type: multi_action
+columns: 2
+
+body:
+  - type: text
+    text: "<gray>This example demonstrates every native input type and a chained action pipeline."
+    width: 360
+
+  - type: item
+    material: DIAMOND
+    amount: 1
+    name: "<aqua>Example Item"
+    lore:
+      - "<gray>Items can be displayed inside dialogs."
+    description: "<dark_gray>Configured entirely from YAML."
+    show-decorations: true
+    show-tooltip: true
+    width: 32
+    height: 32
+
+inputs:
+  - type: text
+    key: nickname
+    label: "<yellow>Nickname"
+    initial: "{player}"
+    width: 300
+    max-length: 16
+    min-length: 3
+    required: true
+    # Only letters, numbers and underscore.
+    regex: "^[A-Za-z0-9_]+$"
+    error-message: "<red>Nickname must be 3-16 characters and contain only letters, numbers or _."
+
+  - type: text
+    key: note
+    label: "<yellow>Short note"
+    initial: ""
+    width: 300
+    max-length: 200
+    multiline: true
+    max-lines: 4
+    height: 70
+    required: false
+
+  - type: boolean
+    key: rules
+    label: "<green>I accept the server rules"
+    initial: false
+    on-true: "yes"
+    on-false: "no"
+    required-true: true
+    error-message: "<red>You must accept the server rules."
+
+  - type: number
+    key: rating
+    label: "<aqua>Rate the server"
+    min: 1
+    max: 10
+    initial: 8
+    step: 1
+    width: 300
+    label-format: "%s: %s/10"
+
+  - type: select
+    key: destination
+    label: "<light_purple>Where next?"
+    width: 300
+    options:
+      - id: spawn
+        display: "<green>Spawn"
+        initial: true
+      - id: info
+        display: "<aqua>Information"
+      - id: stay
+        display: "<gray>Stay here"
+
+buttons:
+  - label: "<green><bold>Submit"
+    tooltip: "<gray>Validate the form and execute all actions"
+    width: 150
+    validate-inputs: true
+    reopen-on-validation-fail: true
+    actions:
+      - type: message
+        text: "<green>Thanks <white>{input:nickname}</white>! Rating: <yellow>{input:rating}</yellow>."
+
+      - type: console-command
+        # Input placeholders can be used in commands. Validate free text carefully.
+        command: "say {player} submitted the registration form"
+
+      - type: sound
+        sound: "minecraft:entity.player.levelup"
+        volume: 0.8
+        pitch: 1.2
+
+      - type: delay
+        ticks: 10
+
+      - type: actionbar
+        text: "<aqua>Your choice: <white>{input:destination}"
+
+      - type: open-dialog
+        dialog: example-navigation
+        conditions:
+          - type: input-equals
+            key: destination
+            value: info
+
+      - type: teleport
+        world: "{world}"
+        x: "{x}"
+        y: "{y}"
+        z: "{z}"
+        conditions:
+          - type: input-equals
+            key: destination
+            value: spawn
+        # Replace the coordinates above with your spawn coordinates if desired.
+
+  - label: "<yellow>Preview Values"
+    tooltip: "<gray>No validation; just prints current response values"
+    width: 150
+    validate-inputs: false
+    actions:
+      - type: message
+        text: "<gray>nickname=<white>{input:nickname}</white>, rules=<white>{input:rules}</white>, rating=<white>{input:rating}</white>, destination=<white>{input:destination}</white>"
+
+  - label: "<red>Admin Only"
+    permission: modexa.admin
+    hide-without-permission: true
+    width: 150
+    actions:
+      - type: message
+        text: "<gold>This button is only rendered for administrators."
+
+exit-button:
+  enabled: true
+  label: "<red>Close"
+  tooltip: "<gray>Close this dialog"
+  width: 150
+  validate-inputs: false
+  actions:
+    - type: close-dialog

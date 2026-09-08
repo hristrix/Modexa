@@ -1,0 +1,32 @@
+id: example-confirm
+enabled: true
+title: "<gold>Are you sure?"
+external-title: "<yellow>Confirmation"
+can-close-with-escape: true
+pause: false
+after-action: CLOSE
+type: confirmation
+
+body:
+  - type: text
+    text: "<gray>This is a native confirmation dialog controlled by YAML."
+    width: 320
+
+yes-button:
+  label: "<green>Yes"
+  tooltip: "<gray>Confirm"
+  width: 150
+  actions:
+    - type: message
+      text: "<green>You confirmed the action."
+    - type: sound
+      sound: "minecraft:ui.button.click"
+
+no-button:
+  label: "<red>No"
+  tooltip: "<gray>Cancel"
+  width: 150
+  validate-inputs: false
+  actions:
+    - type: message
+      text: "<yellow>Cancelled."

@@ -1,0 +1,31 @@
+id: rename
+enabled: true
+title: "<yellow><bold>Rename Home</bold></yellow>"
+type: multi_action
+columns: 1
+permission: dynamichomes.rename
+body:
+  - type: text
+    text: "<gray>Renaming <white>{homes:selected-name}</white> (<white>{homes:selected-slot}</white>). The saved slot and location are preserved."
+    width: 320
+inputs:
+  - type: text
+    key: name
+    label: "<yellow>New name"
+    initial: "{homes:selected-name}"
+    width: 300
+    min-length: 1
+    max-length: 24
+    required: true
+    regex: "^[\\p{L}\\p{N}_ -]+$"
+buttons:
+  - id: rename
+    label: "<green><bold>Rename</bold></green>"
+    actions:
+      - type: homes:rename
+exit-button:
+  enabled: true
+  label: "<gray>Back"
+  actions:
+    - type: open-dialog
+      dialog: homes:detail

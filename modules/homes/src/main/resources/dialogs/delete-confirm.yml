@@ -1,0 +1,18 @@
+id: delete-confirm
+enabled: true
+title: "<red><bold>Delete Home?</bold></red>"
+type: confirmation
+permission: dynamichomes.delete
+body:
+  - type: text
+    text: "<gray>Delete <white>{homes:selected-name}</white>? This removes only that exact saved slot."
+    width: 320
+yes-button:
+  label: "<red><bold>Delete</bold></red>"
+  actions:
+    - type: homes:delete
+no-button:
+  label: "<green>Cancel</green>"
+  actions:
+    - type: open-dialog
+      dialog: homes:detail

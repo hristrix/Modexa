@@ -1,0 +1,12 @@
+name: ModexaHomes
+version: '${version}'
+main: net.hristrix.modexa.modules.homes.HomesModulePlugin
+api-version: '26.2'
+description: Modular Homes implementation for Modexa.
+authors: [Hristrix]
+dependencies:
+  server:
+    Modexa:
+      load: BEFORE
+      required: true
+      join-classpath: true

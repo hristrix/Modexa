@@ -1,0 +1,18 @@
+# Modexa Homes module
+max-homes: 5
+name-max-length: 24
+
+# Safety: on first startup, if this module has no homes.yml, ModexaHomes
+# checks previous plugin folders and COPIES the first matching homes.yml.
+# Legacy files are never moved, edited, or deleted.
+auto-import-legacy-modexa-homes: true
+auto-import-legacy-dialoghomes: true
+
+automatic-backups: true
+backup-count: 10
+
+ui:
+  main-title: "<gradient:#7c3aed:#c084fc><bold>Your Homes</bold></gradient>"
+  external-title: "<light_purple>Homes</light_purple>"
+  columns: 3
+  home-button-width: 150
